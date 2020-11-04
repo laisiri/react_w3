@@ -1,0 +1,199 @@
+React Components
+Components are like functions that return HTML elements.
+Components are independent and reuseable bits of code.
+They serve the same purpose as Javascript functions,but work in isolation and returns HTML via 
+render functions.
+
+Components come in two types,Class components and functions
+in this tutorial we will concentrate on Class components.
+
+Create a Class Component
+When creating a React component,the component's name must start with an 
+upper case letter.
+
+The component has to include the extends React.Component
+statement,this statement creates an inheritance to React.Component,and gives 
+your component access to React.Component's functions.
+
+The component also requires a render() method,this method returns HTML.
+
+Example
+
+index.html:
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1" />
+    <title>React App</title>
+  </head>
+  <body>
+
+    <div id="root"></div>
+
+  </body>
+</html>
+
+index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+**//Creat a Class component called Car
+
+class Car extends React.Component {
+    render() {
+        return <h2>Hi, I am a Car!</h2>;
+    }
+}
+**//Display the Car component in the 'root'element
+ReactDOM.render(<Car />), document.getElementById('root');
+
+Create a function Component
+
+A Function component also returns HTML,and behaves pretty much the same way as a
+Class component,but Class components have some additions,and will be preferred in this tutorial.
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+function Car() {
+    return <h2>Hi, I am  also a Car!</h2>;
+}
+
+ReactDOM.render(<Car />,document.getElementById('root'));
+
+Component Constructor
+
+If there is a constructor() function in your component,this 
+function will be called when the component gets initiated.
+
+The constructor function is where you initiate the component's properties.
+
+In React,component properties should be kept in an object called 'state'.
+
+The constructor function is also where you honor the inheritance of the parent 
+component by including the super() statement,which executes the parent 
+component's constructor function,and your component has access to all the functions
+of the parent component (React.Component).
+
+Create a constructor function in the Car component,and add a color
+property:
+
+class Car extends React.Component {
+    constructor() {
+        super();
+        this.state = {color:'red'};
+    }
+    render() {
+        return <h2>I am a {this.state.color} Car!</h2>;
+    }
+}
+
+Props
+
+Another way of handling component properties is by using props.
+
+Props are like function arguments,and you send them into the component as attributes.
+
+Use an attributes to pass a color to the Car component,and use it in the reder() function:
+
+class Car extends React.Component {
+    reder() {
+        return <h2>I am a {this.porps.color} Car!</h2>;
+    }
+}
+
+ReactDom.render(<Car color='red' />,document.getElementById("root"));
+
+Components in Components
+
+We can refer to components inside other components:
+
+Use the Car component in side the Garage component:
+
+class Car extends React.Component {
+  render() {
+    return <h2>I am a Car!</h2>;
+  }
+}
+
+class Garage extends React.Component {
+  reder() {
+    return (
+      <div>
+      <h1>Who lives in my Garage?</h1>
+      <Car />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<Garage />,document.getElementById("root"));
+
+Components in Files
+
+React is all about re-using code, and it can be smart to insert some of
+your components in separate files.
+
+Todo that,create a new file with a .js file extension and put the code inside it:
+
+This is the new file, we named it "App.js":
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class Car extends React.Component {
+  reder() {
+    return <h2>Hi, I am Car!</h2>
+  };
+}
+
+export default Car;
+
+
+React Props
+
+Props are arguments passed into React component.
+Props are passed to components via HTML attributes.
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class Car extends React.Component {
+  render() {
+    return <h2>I am a {this.props.brand}!</h2>; 
+  }
+}
+
+ReactDOM.render(<Car brand='Ford' />,document.getElementById("root"));
+
+Pass Data 
+
+How you pass data from one component to anther as parameter.
+
+Send the 'brand' property from the Garage component to the Car component.
+
+class Car extends React.Component {
+  render() {
+    return <h2>I am a {this.props.brand}!</h2>;
+    )
+  }
+
+class Garage extends React.Component {
+  render() {
+    return (
+      <div>
+      <h1>Who lives in my garage?</h1>
+      <Car brand='Ford' />;
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<Garage />,document.getElementById("root"));
+
+
+
